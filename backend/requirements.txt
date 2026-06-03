@@ -10,8 +10,8 @@ pdfplumber==0.10.3
 PyPDF2==3.0.1
 
 # Embeddings & Vector operations
-sentence-transformers==2.2.2
-torch==2.1.1
+torch==2.2.1
+sentence-transformers==2.3.1
 
 # OpenSearch client
 opensearch-py==2.3.1

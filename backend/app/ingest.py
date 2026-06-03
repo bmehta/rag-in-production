@@ -63,6 +63,7 @@ class PDFIngestionPipeline:
                 "number_of_shards": 1,
                 "number_of_replicas": 0,
                 "index": {
+                    "knn": True,
                     "max_result_window": 10000,
                 },
             },
@@ -76,7 +77,7 @@ class PDFIngestionPipeline:
                     },
                     # Dense vector for semantic search
                     "embedding": {
-                        "type": "dense_vector",
+                        "type": "knn_vector",
                         "dimension": EMBEDDING_DIMENSION,
                         "method": {
                             "name": "hnsw",
