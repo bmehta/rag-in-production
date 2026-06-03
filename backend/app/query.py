@@ -15,7 +15,7 @@ from collections import defaultdict
 import structlog
 from sentence_transformers import SentenceTransformer
 from opensearchpy import OpenSearch
-from anthropic import Anthropic
+from openai import OpenAI
 
 logger = structlog.get_logger(__name__)
 
@@ -24,7 +24,7 @@ EMBEDDING_MODEL = "BAAI/bge-small-en-v1.5"
 OPENSEARCH_HOST = os.getenv("OPENSEARCH_HOST", "opensearch")
 OPENSEARCH_PORT = int(os.getenv("OPENSEARCH_PORT", "9200"))
 OPENSEARCH_INDEX = "rag-chunks"
-CLAUDE_MODEL = "claude-3-5-sonnet-20241022"
+CLAUDE_MODEL = "gpt-4"
 
 # Rank fusion weights (60% semantic / 40% lexical for compliance)
 VECTOR_WEIGHT = 0.6
@@ -51,11 +51,11 @@ class QueryEngine:
             ssl_show_warn=False,
         )
 
-        # Initialize Anthropic client
-        api_key = os.getenv("ANTHROPIC_API_KEY")
+        # Initialize OpenAI client
+        api_key = os.getenv("OPENAI_API_KEY")
         if not api_key:
-            raise ValueError("ANTHROPIC_API_KEY environment variable not set")
-        self.anthropic_client = Anthropic(api_key=api_key)
+            raise ValueError("OPENAI_API_KEY environment variable not set")
+        self.openai_client = OpenAI(api_key=api_key)
 
         logger.info("QueryEngine initialized successfully")
 
@@ -338,19 +338,21 @@ Context:
 Please provide a comprehensive answer grounded in the provided compliance documentation."""
 
         try:
-            response = self.anthropic_client.messages.create(
+            response = self.openai_client.chat.completions.create(
                 model=CLAUDE_MODEL,
                 max_tokens=2048,
-                system=system_prompt,
-                messages=[{"role": "user", "content": user_prompt}],
+                messages=[
+                    {"role": "system", "content": system_prompt},
+                    {"role": "user", "content": user_prompt}
+                ],
             )
 
-            answer = response.content[0].text
+            answer = response.choices[0].message.content
 
             logger.info(
                 "Answer generated",
                 query=query,
-                output_tokens=response.usage.output_tokens,
+                output_tokens=response.usage.completion_tokens,
             )
 
             return answer
