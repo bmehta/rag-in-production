@@ -147,6 +147,7 @@ async def ingest_document(file: UploadFile = File(...)):
 
     try:
         logger.info("Ingesting document", filename=file.filename)
+        print(f"📄 Ingesting document: {file.filename}")
 
         # Read file content
         content = await file.read()
