@@ -51,13 +51,35 @@ class QueryEngine:
             ssl_show_warn=False,
         )
 
-        # Initialize OpenAI client
+        self.openai_client = None
+
+        logger.info("QueryEngine initialized successfully")
+
+    def _get_openai_client(self) -> OpenAI:
+        """Create the OpenAI client on first use when an API key is configured."""
+        if self.openai_client is not None:
+            return self.openai_client
         api_key = os.getenv("OPENAI_API_KEY")
         if not api_key:
             raise ValueError("OPENAI_API_KEY environment variable not set")
         self.openai_client = OpenAI(api_key=api_key)
+        return self.openai_client
 
-        logger.info("QueryEngine initialized successfully")
+    async def retrieve(self, query: str, top_k: int = 10) -> List[dict]:
+        """
+        Run hybrid retrieval only (no LLM generation).
+
+        Args:
+            query: User query string
+            top_k: Number of top chunks to return
+
+        Returns:
+            Ranked chunks with chunk_id, page_number, text, relevance_score, etc.
+        """
+        logger.info("Starting retrieval", query=query, top_k=top_k)
+        results = await self._hybrid_search(query, top_k)
+        logger.info("Retrieval complete", results_count=len(results))
+        return results
 
     async def query_and_generate(
         self, query: str, top_k: int = 5
@@ -338,7 +360,7 @@ Context:
 Please provide a comprehensive answer grounded in the provided compliance documentation."""
 
         try:
-            response = self.openai_client.chat.completions.create(
+            response = self._get_openai_client().chat.completions.create(
                 model=CLAUDE_MODEL,
                 max_tokens=2048,
                 messages=[

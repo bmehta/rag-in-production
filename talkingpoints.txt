@@ -1,0 +1,7 @@
+- what is rag
+- architecture diagram
+- traditional tests
+- rag improvements - re-ranker cross encoder,  
+- dataset chosen
+- eval - retrieval eval (precision, recall, mrr, ndcg) and generation eval
+- make evals part of ci pipeline

@@ -1,0 +1,12 @@
+{"id": "ac2-what-is", "query": "What is AC-2?", "tags": ["exact-id"], "relevant_text_any": ["AC-2", "Account Management"], "relevant_pages": [], "relevant_chunk_ids": []}
+{"id": "ac2-access-requirements", "query": "What are AC-2 access control requirements?", "tags": ["exact-id", "semantic"], "relevant_text_any": ["AC-2", "access control", "Account Management"], "relevant_pages": [], "relevant_chunk_ids": []}
+{"id": "ac2-exact-phrase", "query": "AC-2 Account Management", "tags": ["exact-id"], "relevant_text_any": ["AC-2", "Account Management"], "relevant_pages": [], "relevant_chunk_ids": []}
+{"id": "user-account-management", "query": "How do I manage user accounts?", "tags": ["semantic"], "relevant_text_any": ["account", "AC-2", "access control"], "relevant_pages": [], "relevant_chunk_ids": []}
+{"id": "federal-access-control", "query": "Access control requirements for federal systems", "tags": ["semantic", "compliance"], "relevant_text_any": ["access control", "AC-"], "relevant_pages": [], "relevant_chunk_ids": []}
+{"id": "encryption-at-rest", "query": "Encryption requirements for data at rest", "tags": ["semantic", "cross-domain"], "relevant_text_any": ["encryption", "data at rest", "SC-28"], "relevant_pages": [], "relevant_chunk_ids": []}
+{"id": "multi-control-encryption-access", "query": "Encryption and access control", "tags": ["multi-control"], "relevant_text_any": ["encryption", "access control"], "relevant_pages": [], "relevant_chunk_ids": []}
+{"id": "system-security-requirements", "query": "What are system security requirements?", "tags": ["semantic", "compliance"], "relevant_text_any": ["security", "system"], "relevant_pages": [], "relevant_chunk_ids": []}
+{"id": "federal-system-security", "query": "Federal system security requirements", "tags": ["compliance"], "relevant_text_any": ["security", "federal", "system"], "relevant_pages": [], "relevant_chunk_ids": []}
+{"id": "sc28-cryptography", "query": "What are cryptography and encryption controls?", "tags": ["semantic"], "relevant_text_any": ["SC-28", "cryptograph", "encryption"], "relevant_pages": [], "relevant_chunk_ids": []}
+{"id": "bm25-control-id", "query": "Control AC-2", "tags": ["lexical"], "relevant_text_any": ["AC-2"], "relevant_pages": [], "relevant_chunk_ids": []}
+{"id": "identity-management", "query": "Identity and account management requirements", "tags": ["semantic"], "relevant_text_any": ["identity", "account", "AC-2"], "relevant_pages": [], "relevant_chunk_ids": []}

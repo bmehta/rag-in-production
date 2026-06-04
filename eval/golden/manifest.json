@@ -1,0 +1,10 @@
+{
+  "eval_k": 10,
+  "top_k": 20,
+  "thresholds": {
+    "recall_at_10": 0.8,
+    "mrr": 0.6,
+    "ndcg_at_10": 0.7,
+    "precision_at_10": 0.3
+  }
+}

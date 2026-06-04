@@ -29,7 +29,19 @@ services:
       interval: 10s
       timeout: 5s
       retries: 5
-
+  opensearch-dashboards:
+    image: opensearchproject/opensearch-dashboards:latest
+    container_name: rag-opensearch-dashboards
+    environment:
+      - OPENSEARCH_HOSTS=["http://opensearch:9200"]
+      - DISABLE_SECURITY_DASHBOARDS_PLUGIN=true  # Full URL, plural key
+    ports:
+      - "5601:5601"
+    depends_on:
+      opensearch:
+        condition: service_healthy             # Wait until healthcheck passes
+    networks:
+      - rag-network
   backend:
     build:
       context: ./backend
